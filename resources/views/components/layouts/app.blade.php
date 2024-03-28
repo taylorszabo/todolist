@@ -4,13 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello World</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
+    <title>Todo List</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
 {{ $slot }}
-
-@livewireScripts
 </body>
 </html>
