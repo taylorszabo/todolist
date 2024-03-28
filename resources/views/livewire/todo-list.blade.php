@@ -1,12 +1,12 @@
 
 <div>
-    <form>
+    <form @submit.prevent>
         <input wire:model="newTodo" type="text" placeholder="Add a new todo...">
         <button wire:click="addTodo">Add</button>
 
         <ul>
             @foreach ($todos as $todo)
-                <li >
+                <li>
                     <input type="checkbox" wire:click="toggleCompleted({{ $todo->id }})" {{ $todo->completed ? 'checked' : '' }}>
                     {{ $todo->name }}
                     <button wire:click="deleteTodo({{ $todo->id }})">Delete</button>
