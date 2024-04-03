@@ -22,9 +22,13 @@ class TodoList extends Component
 
     public function addTodo()
     {
-        Todo::create(['name' => $this->newTodo, 'completed' => false]);
-        $this->newTodo = '';
-        $this->todos = Todo::all();
+        if($this->newTodo !== '' && $this->newTodo !== null)
+        {
+            Todo::create(['name' => $this->newTodo, 'completed' => false]);
+            $this->newTodo = '';
+            $this->todos = Todo::all();
+        }
+
     }
 
     public function toggleCompleted($todoId)
