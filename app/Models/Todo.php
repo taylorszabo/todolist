@@ -10,4 +10,12 @@ class Todo extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function rules(): array
+    {
+        return [
+            'todos.*.name' => 'string',
+            'todos.*.completed' => 'bool'
+        ];
+    }
 }

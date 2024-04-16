@@ -9,21 +9,21 @@
     <form @submit.prevent>
         <div>
             <input wire:model="newTodo" type="text" class="bg-amber-300 w-full" placeholder="Add a new todo..." />
-            <button wire:click="addTodo" disabled>Add</button>
+            <button wire:click="addTodo" hidden>Add</button>
             <hr>
             <ul>
-                @foreach ($todos as $todo)
+                @foreach ($todos as $index => $todo)
                     <div class="pt-1.5 pb-1.5">
-                        <li>
+                        <li wire:key="{{$todo['id']}}">
                             @if (!$isEditing)
-                                <input type="checkbox" class="mr-1 " wire:click="toggleCompleted({{ $todo->id }})" {{ $todo->completed ? 'checked' : '' }} />
-                                <span class="{{ $todo->completed ? 'line-through' : '' }}">
-                               {{ $todo->name }}
+                                <input type="checkbox" class="mr-1 "  wire:click="toggleCompleted({{ $todo['id'] }})" {{ $todo['completed'] ? 'checked' : '' }} />
+                                <span class="{{ $todo['completed'] ? 'line-through' : '' }}">
+                                {{ $todo['name'] }}
                             </span>
                             @else
-                                <input id="updateTodo{{$todo->id}}" name="updateTodo{{$todo->id}}" value="{{ $todo->name }}" class="bg-amber-100 h-full"/>
-                                <button wire:click="editTodo({{ $todo->id }}, document.getElementById('updateTodo{{$todo->id}}').value)" class="float-right p-0.5 font-bold text-black">edit</button>
-                                <button wire:click="deleteTodo({{ $todo->id }})" class="float-right p-0.5 font-bold text-red-600">X</button>
+                                <input wire:model.live="todos.{{ $index }}.name" class="bg-amber-100 h-full"/>
+                                <button wire:click="editTodo({{ $index }}" class="float-right p-0.5 font-bold text-black">Save</button>
+                                <button wire:click="deleteTodo({{ $todo['id'] }})" class="float-right p-0.5 font-bold text-red-600">X</button>
                             @endif
                         </li>
                         <hr>

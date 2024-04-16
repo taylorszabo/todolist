@@ -48,10 +48,11 @@ class TodoList extends Component
         $this->todos = Todo::all();
     }
 
-    public function editTodo($todoId, $todoName) :void
+    public function editTodo($index) :void
     {
-        $todo = Todo::find($todoId);
-        $todo->update(['name' => $todoName]);
+        dd(Todo::find($this->todos[$index]['id']));
+        $todo = Todo::find($this->todos[$index]['id']);
+        $todo->update(['name' => $this->todos[$index]['name']]);
         $this->todos = Todo::all();
         $this->isEditing = false;
     }
